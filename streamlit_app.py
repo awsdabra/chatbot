@@ -5,7 +5,7 @@ from hugchat.login import Login
 # App title
 st.set_page_config(page_title="🤗💬 FinOpsChat")
 
-# Hugging Face Credentials
+# Credentials
 with st.sidebar:
     st.title('🤗💬 FinOpsChat')
     if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
@@ -32,9 +32,10 @@ for message in st.session_state.messages:
 
 # Function for generating LLM response
 def generate_response(prompt_input, email, passwd):
-    # Hugging Face Login
+    # Login
     sign = Login(email, passwd)
     cookies = sign.login()
+    
     # Create ChatBot                        
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot.chat(prompt_input)
@@ -49,6 +50,7 @@ if prompt := st.chat_input(disabled=not (hf_email and hf_pass)):
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
+            # Call Bedrock APIs
             response = generate_response(prompt, hf_email, hf_pass) 
             st.write(response) 
     message = {"role": "assistant", "content": response}
