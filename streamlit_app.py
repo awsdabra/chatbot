@@ -9,7 +9,7 @@ st.set_page_config(page_title="🤗💬 FinOpsChat")
 with st.sidebar:
     st.title('🤗💬 FinOpsChat')
     if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
-        st.success('HuggingFace Login credentials already provided!', icon='✅')
+        st.success('Chatbot login credentials already provided!', icon='✅')
         hf_email = st.secrets['EMAIL']
         hf_pass = st.secrets['PASS']
     else:
@@ -19,7 +19,7 @@ with st.sidebar:
             st.warning('Please enter your credentials!', icon='⚠️')
         else:
             st.success('Proceed to entering your prompt message!', icon='👉')
-    st.markdown('📖 QA Bot on knowledge base.')
+    st.markdown('📖 FinOps Chatbot')
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
